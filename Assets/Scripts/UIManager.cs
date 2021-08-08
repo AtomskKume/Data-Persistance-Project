@@ -10,9 +10,16 @@ using TMPro;
 public class UIManager : MonoBehaviour {
 
     [SerializeField] private TMP_InputField playerInput;
+    [SerializeField] private GameObject previousChampionScreen;
+    [SerializeField] private TextMeshProUGUI previousChampionText;
+
+    private void Start() {
+        GameManager.instance.LoadData();
+        UpdatePreviousChampion();
+    }
 
     public void StartNew() {
-        GameManager.instance.playerName = playerInput.text;
+        GameManager.instance.actualPlayerName = playerInput.text;
         SceneManager.LoadScene(1);
     }
 
@@ -24,5 +31,11 @@ public class UIManager : MonoBehaviour {
         #endif
     }
 
-
+    private void UpdatePreviousChampion() {
+        Debug.Log(GameManager.instance.playerName);
+        if(GameManager.instance.playerName!= "") {
+            previousChampionText.text = GameManager.instance.playerName + " Score: " + GameManager.instance.playerScore;
+            previousChampionScreen.SetActive(true);
+        }
+    }
 }

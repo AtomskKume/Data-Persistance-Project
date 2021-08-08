@@ -83,7 +83,11 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
-        if(m_Points > GameManager.instance.playerScore) GameManager.instance.playerScore = m_Points;
+        if (m_Points > GameManager.instance.playerScore) { 
+            GameManager.instance.playerScore = m_Points;
+            GameManager.instance.playerName = GameManager.instance.actualPlayerName;
+            GameManager.instance.SaveData();
+        }
         m_GameOver = true;
         GameOverText.SetActive(true);
         AddBestScoreText();

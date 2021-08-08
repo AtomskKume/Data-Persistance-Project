@@ -62,6 +62,9 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
@@ -74,22 +77,22 @@ public class MainManager : MonoBehaviour
     private void AddBestScoreText() {
         string playerName = "" ;
         string playerScore = "" ;
-        if(GameManager.instance.playerScore != 0) {
-            playerName = GameManager.instance.playerName;
-            playerScore = GameManager.instance.playerScore.ToString();
+        if(GameManager.instance.playersInLeader != 0) {
+            playerName = GameManager.instance.GetPlayer(0).playerName;
+            playerScore = GameManager.instance.GetPlayer(0).playerScore.ToString();
         } 
         bestScoreText.text = $"Best Score: {playerName}: {playerScore}";
     }
 
     public void GameOver()
     {
-        if (m_Points > GameManager.instance.playerScore) { 
-            GameManager.instance.playerScore = m_Points;
-            GameManager.instance.playerName = GameManager.instance.actualPlayerName;
-            GameManager.instance.SaveData();
-        }
+        GameManager.instance.playerScore = m_Points;
+        GameManager.instance.playerName = GameManager.instance.actualPlayerName;
+        GameManager.instance.SaveData();
+        
         m_GameOver = true;
         GameOverText.SetActive(true);
         AddBestScoreText();
+        
     }
 }

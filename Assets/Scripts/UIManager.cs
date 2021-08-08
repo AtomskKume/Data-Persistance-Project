@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void GoToladerBoard() {
+        SceneManager.LoadScene(2);
+    }
+
     public void Exit() {
         #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
@@ -32,7 +36,6 @@ public class UIManager : MonoBehaviour {
     }
 
     private void UpdatePreviousChampion() {
-        Debug.Log(GameManager.instance.playerName);
         if(GameManager.instance.playerName!= "") {
             previousChampionText.text = GameManager.instance.playerName + " Score: " + GameManager.instance.playerScore;
             previousChampionScreen.SetActive(true);
